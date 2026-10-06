@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #07080E; min-height: 100%;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA One // Physical Voice Instrument — ElevenLabs</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="description" content="A physical voice instrument that the visitor scrolls around. Words → Voice → Experience.">
+
+  <!-- Instant dark foundation background -->
+  <style>
+    html, body {
+      background-color: #07080E !important;
+      margin: 0;
+      padding: 0;
+      color: #F5F7FF;
+      overflow-x: hidden;
+      font-family: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+    }
+    #root {
+      min-height: 100vh;
+      background-color: transparent;
+    }
+  </style>
+
+  <!-- Typography: Bricolage Grotesque, Instrument Serif, DM Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/styles/app.css">
+</head>
+<body style="background-color: #07080E; margin: 0; padding: 0;">
+  <div id="root">
+    <!-- Immediate first paint fallback - replaced upon React hydration -->
+    <div style="position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(72px, 10vw, 130px) clamp(24px, 6vw, 80px) 48px; max-width: 1440px; margin: 0 auto; left: 0; right: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+        <span style="font-family: monospace; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #00F5FF, #A855F7); color: #07080E; padding: 4px 10px; border-radius: 6px;">AURA ONE</span>
+        <span style="font-family: monospace; font-size: 12px; color: #8892B0;">INSTRUMENT // 047</span>
+      </div>
+      <div style="text-align: center; margin: auto 0;">
+        <h1 style="font-size: clamp(64px, 15.5vw, 230px); line-height: 0.88; letter-spacing: -0.04em; color: #FFFFFF; margin: 0; font-weight: 800;">
+          Give words a <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #00F5FF;">voice.</span>
+        </h1>
+        <p style="color: rgba(235, 240, 255, 0.8); font-size: 18px; margin-top: 20px; font-weight: 500;">
+          A physical voice instrument sculpted from tactile matte plastic and driven by neural acoustic synthesis.
+        </p>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <span style="font-family: monospace; font-size: 11px; color: #00F5FF;">INITIALIZING VOICE ENGINE...</span>
+        <span style="font-family: monospace; font-size: 11px; color: #8892B0;">29 LANGUAGES • 10 VOICES</span>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

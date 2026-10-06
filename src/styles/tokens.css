@@ -1,0 +1,142 @@
+:root {
+  /* Exact Colors - Upgraded Vibrant Fluid Palette */
+  --c-orange: #FF4B14;
+  --c-coral: #FF5E3A;
+  --c-magenta: #EC4899;
+  --c-pink: #FF007A;
+  --c-violet: #A855F7;
+  --c-purple: #7928CA;
+  --c-cyan: #00F5FF;
+  --c-blue: #0EA5E9;
+  --c-emerald: #00FF88;
+  --c-lime: #D4FF3A;
+  --c-amber: #FFB800;
+  --c-gold: #FFC837;
+
+  /* Neutrals & Dark Glass */
+  --c-ink: #07080E;
+  --c-obsidian: #0D0F18;
+  --c-surface: #141724;
+  --c-surface-light: #1E2337;
+  --c-bone: #F5F7FF;
+  --c-smoke: #8892B0;
+  --c-muted: #495474;
+
+  /* Glassmorphism System */
+  --glass-bg: rgba(13, 16, 27, 0.78);
+  --glass-bg-subtle: rgba(20, 24, 40, 0.6);
+  --glass-bg-card: rgba(16, 20, 34, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-glow: rgba(0, 245, 255, 0.35);
+
+  /* Fluid Moving Gradients */
+  --grad-fluid-aurora: linear-gradient(135deg, #00F5FF 0%, #A855F7 35%, #FF007A 70%, #FFB800 100%);
+  --grad-fluid-cyber: linear-gradient(135deg, #00FF88 0%, #00F5FF 50%, #A855F7 100%);
+  --grad-fluid-sunset: linear-gradient(135deg, #FF5E3A 0%, #FF007A 50%, #A855F7 100%);
+  --grad-fluid-neon: linear-gradient(135deg, #D4FF3A 0%, #00FF88 50%, #00F5FF 100%);
+  --grad-text: linear-gradient(120deg, #00F5FF, #A855F7, #FF007A, #FFB800, #00FF88, #00F5FF);
+  --grad-card-border: linear-gradient(135deg, rgba(0, 245, 255, 0.6), rgba(168, 85, 247, 0.5), rgba(255, 0, 122, 0.5), rgba(0, 255, 136, 0.4));
+
+  /* Dynamic scroll-driven background base */
+  --bg-current: #07080E;
+
+  /* Geometry & Radii */
+  --r-panel: 32px;
+  --r-screen: 20px;
+  --r-pill: 999px;
+  --r-sm: 10px;
+  --r-md: 16px;
+
+  /* Spacing */
+  --space-unit: 8px;
+  --pad-section: clamp(72px, 10vw, 130px);
+  --max-width: 1440px;
+
+  /* Luminous Glows & Depth */
+  --glow-cyan: 0 0 30px rgba(0, 245, 255, 0.45);
+  --glow-violet: 0 0 30px rgba(168, 85, 247, 0.45);
+  --glow-magenta: 0 0 30px rgba(255, 0, 122, 0.45);
+  --glow-lime: 0 0 30px rgba(212, 255, 58, 0.45);
+  --glow-amber: 0 0 30px rgba(255, 184, 0, 0.45);
+  --shadow-contact: 0 32px 80px rgba(0, 0, 0, 0.7);
+  --shadow-card-pop: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 245, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-current);
+  color: var(--c-bone);
+  font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fluid Gradient Text Animation Utility */
+@keyframes fluidTextShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-fluid-gradient {
+  background: var(--grad-text);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fluidTextShift 8s ease infinite;
+}
+
+.text-cyan-glow {
+  color: var(--c-cyan);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+}
+
+.text-violet-glow {
+  color: var(--c-violet);
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+.text-lime-glow {
+  color: var(--c-lime);
+  text-shadow: 0 0 20px rgba(212, 255, 58, 0.6);
+}
+
+.text-pink-glow {
+  color: var(--c-pink);
+  text-shadow: 0 0 20px rgba(255, 0, 122, 0.6);
+}
+
+/* Custom Scrollbar - Sleek Neon */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--c-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--c-cyan), var(--c-violet));
+  border-radius: var(--r-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--c-lime), var(--c-cyan));
+}
+
+::selection {
+  background: var(--c-cyan);
+  color: var(--c-ink);
+}

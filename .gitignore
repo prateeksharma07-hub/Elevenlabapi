@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Production Build
+dist/
+dist-ssr/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Debug and temporary shots
+*.log
+shot_*.png
+test_*.cjs
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
