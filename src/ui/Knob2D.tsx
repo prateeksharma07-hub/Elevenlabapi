@@ -99,8 +99,8 @@ export const Knob2D: React.FC<Knob2DProps> = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         style={{
-          width: '64px',
-          height: '64px',
+          width: 'clamp(48px, 11vw, 64px)',
+          height: 'clamp(48px, 11vw, 64px)',
           borderRadius: '50%',
           backgroundColor: '#0F121E',
           border: `1.5px solid rgba(255, 255, 255, 0.12)`,
@@ -117,7 +117,7 @@ export const Knob2D: React.FC<Knob2DProps> = ({
             top: '50%',
             left: '50%',
             width: '3.5px',
-            height: '24px',
+            height: 'clamp(16px, 3.8vw, 24px)',
             backgroundColor: accentColor,
             borderRadius: '2px',
             transformOrigin: '50% 100%',
@@ -132,8 +132,8 @@ export const Knob2D: React.FC<Knob2DProps> = ({
             position: 'absolute',
             top: '50%',
             left: '50%',
-            width: '18px',
-            height: '18px',
+            width: 'clamp(14px, 3vw, 18px)',
+            height: 'clamp(14px, 3vw, 18px)',
             borderRadius: '50%',
             backgroundColor: '#171B2B',
             border: '1px solid rgba(255, 255, 255, 0.15)',

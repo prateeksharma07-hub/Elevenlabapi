@@ -188,16 +188,63 @@ html, body {
   align-items: center;
 }
 
-@media (max-width: 860px) {
+.translate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Mobile & Touch Viewport Rules */
+@media (max-width: 768px) {
+  .app-viewport {
+    height: 100dvh;
+  }
+
   .studio-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+
   .translate-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  header {
-    padding: 12px 16px !important;
+
+  .translate-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: flex !important;
+  }
+
+  .show-on-mobile-inline {
+    display: inline !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile-inline {
+    display: none !important;
   }
 }

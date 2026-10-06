@@ -31,15 +31,15 @@ export const S04Translate: React.FC = () => {
     }
   }, []);
 
-  // Section visibility in 60% - 82% range
+  // Section visibility in 58% - 80% range (strictly ends at 0.80 so zero overlap with S05)
   let opacity = 0;
-  if (progress >= 0.60 && progress <= 0.84) {
-    if (progress < 0.66) {
-      opacity = (progress - 0.60) / 0.06;
-    } else if (progress <= 0.78) {
+  if (progress >= 0.58 && progress <= 0.80) {
+    if (progress < 0.64) {
+      opacity = (progress - 0.58) / 0.06;
+    } else if (progress <= 0.74) {
       opacity = 1;
     } else {
-      opacity = Math.max(0, 1 - (progress - 0.78) / 0.06);
+      opacity = Math.max(0, 1 - (progress - 0.74) / 0.06);
     }
   }
 
@@ -67,9 +67,9 @@ export const S04Translate: React.FC = () => {
         zIndex: 10,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end', // Leaves top area clear for the parked 3D AURA One & Language Ring
+        justifyContent: 'center',
         alignItems: 'center',
-        padding: '0 clamp(20px, 4vw, 48px) clamp(36px, 5vw, 64px)',
+        padding: 'clamp(52px, 6vw, 80px) clamp(10px, 3vw, 48px) clamp(16px, 3vw, 48px)',
         opacity,
         pointerEvents: isInteractive ? 'auto' : 'none',
         transition: 'opacity 0.25s ease',
@@ -86,11 +86,14 @@ export const S04Translate: React.FC = () => {
           color: 'var(--c-bone)',
           borderRadius: 'var(--r-panel)',
           border: '1.5px solid rgba(236, 72, 153, 0.35)',
-          padding: 'clamp(24px, 3.5vw, 36px)',
+          padding: 'clamp(14px, 2.5vw, 32px)',
           boxShadow: '0 32px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(236, 72, 153, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '20px',
+          gap: 'clamp(12px, 2vw, 20px)',
+          maxHeight: 'calc(100dvh - 74px)',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
           position: 'relative',
         }}
       >
@@ -156,7 +159,7 @@ export const S04Translate: React.FC = () => {
             >
               DETECTED: {detectedLang}
             </div>
-            <span className="font-mono" style={{ fontSize: '11px', color: 'var(--c-smoke)' }}>
+            <span className="font-mono hide-on-mobile" style={{ fontSize: '11px', color: 'var(--c-smoke)' }}>
               PARKED 3D AURA ONE & RING ABOVE
             </span>
           </div>
@@ -258,7 +261,7 @@ export const S04Translate: React.FC = () => {
           </div>
 
           {/* Swap & Translate Action Column */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+          <div className="translate-actions" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <button
               type="button"
               onClick={handleSwap}
@@ -399,10 +402,10 @@ export const S04Translate: React.FC = () => {
               background: 'rgba(255, 255, 255, 0.05)',
               color: 'var(--c-bone)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
-              padding: '10px 20px',
+              padding: 'clamp(8px, 1.2vw, 10px) clamp(14px, 1.8vw, 20px)',
               borderRadius: 'var(--r-pill)',
               cursor: 'pointer',
-              fontSize: '12px',
+              fontSize: 'clamp(11px, 1.1vw, 12px)',
               fontWeight: 600,
               transition: 'all 0.2s ease',
             }}
@@ -421,11 +424,11 @@ export const S04Translate: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              padding: '14px 28px',
+              padding: 'clamp(12px, 1.5vw, 14px) clamp(18px, 2.5vw, 28px)',
               borderRadius: 'var(--r-pill)',
               cursor: 'pointer',
               fontWeight: 800,
-              fontSize: '13px',
+              fontSize: 'clamp(11px, 1.2vw, 13px)',
             }}
             data-cursor="press"
           >

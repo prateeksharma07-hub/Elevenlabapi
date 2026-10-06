@@ -11,8 +11,8 @@ export const S05Finale: React.FC = () => {
   const { speakHeroGreeting, isGenerating, isPlaying } = useStudio();
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Active in 82% - 100% scroll range
-  const opacity = progress > 0.80 ? Math.min(1, (progress - 0.80) / 0.08) : 0;
+  // Active in 81% - 100% scroll range (completely decoupled from S04 which ends at 0.80)
+  const opacity = progress >= 0.81 ? Math.min(1, (progress - 0.81) / 0.07) : 0;
   const isInteractive = opacity > 0.4;
 
   const handleHearTagline = () => {
@@ -30,7 +30,7 @@ export const S05Finale: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: 'clamp(80px, 8vw, 120px) 0 clamp(32px, 4vw, 48px)',
+        padding: 'clamp(56px, 7vw, 110px) 0 clamp(20px, 3vw, 48px)',
         opacity,
         pointerEvents: isInteractive ? 'auto' : 'none',
         transition: 'opacity 0.25s ease',
@@ -163,9 +163,9 @@ export const S05Finale: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
-              padding: '18px 36px',
+              padding: 'clamp(14px, 1.8vw, 18px) clamp(22px, 3vw, 36px)',
               borderRadius: 'var(--r-pill)',
-              fontSize: '14px',
+              fontSize: 'clamp(12px, 1.2vw, 14px)',
               fontWeight: 800,
               letterSpacing: '0.08em',
               cursor: 'pointer',

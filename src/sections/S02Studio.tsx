@@ -139,7 +139,7 @@ export const S02Studio: React.FC = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 'clamp(64px, 7vw, 96px) clamp(20px, 4vw, 48px) 32px',
+        padding: 'clamp(52px, 6vw, 84px) clamp(10px, 2.5vw, 48px) clamp(12px, 2vw, 32px)',
         opacity,
         pointerEvents: isInteractive ? 'auto' : 'none',
         transition: 'opacity 0.2s ease',
@@ -157,12 +157,13 @@ export const S02Studio: React.FC = () => {
           borderRadius: 'var(--r-panel)',
           border: '1.5px solid rgba(0, 245, 255, 0.25)',
           boxShadow: '0 32px 80px rgba(0, 0, 0, 0.7), 0 0 45px rgba(168, 85, 247, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
-          padding: 'clamp(24px, 3vw, 36px)',
+          padding: 'clamp(14px, 2.5vw, 32px)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '22px',
-          maxHeight: '88vh',
+          gap: 'clamp(12px, 2vw, 20px)',
+          maxHeight: 'calc(100dvh - 74px)',
           overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
           position: 'relative',
         }}
       >
@@ -249,7 +250,7 @@ export const S02Studio: React.FC = () => {
               <span>{status}</span>
             </div>
 
-            <span className="font-mono" style={{ fontSize: '11px', color: 'var(--c-smoke)' }}>
+            <span className="font-mono hide-on-mobile" style={{ fontSize: '11px', color: 'var(--c-smoke)' }}>
               CTRL+ENTER TO GENERATE • SPACE TO PLAY
             </span>
           </div>
@@ -303,21 +304,21 @@ export const S02Studio: React.FC = () => {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Enter text to narrate with neural precision..."
-                rows={6}
+                rows={5}
                 style={{
                   width: '100%',
                   background: 'rgba(8, 11, 20, 0.88)',
                   color: '#FFFFFF',
                   fontFamily: 'var(--font-body)',
-                  fontSize: '16px',
+                  fontSize: 'clamp(14px, 1.2vw, 16px)',
                   lineHeight: '1.6',
-                  padding: '18px 20px',
+                  padding: 'clamp(12px, 1.8vw, 18px)',
                   borderRadius: 'var(--r-screen)',
                   border: '1.5px solid rgba(0, 245, 255, 0.35)',
                   resize: 'vertical',
                   boxShadow: 'inset 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 245, 255, 0.1)',
                   outline: 'none',
-                  minHeight: '170px',
+                  minHeight: 'clamp(110px, 16vh, 170px)',
                   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
                 }}
                 onFocus={(e) => {
@@ -402,7 +403,7 @@ export const S02Studio: React.FC = () => {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(5, 1fr)',
-                  gap: '6px',
+                  gap: 'clamp(3px, 0.8vw, 6px)',
                 }}
               >
                 {VOICES.map((v) => {
@@ -415,18 +416,19 @@ export const S02Studio: React.FC = () => {
                       onClick={() => setVoiceId(v.id)}
                       className="font-btn"
                       style={{
-                        padding: '9px 4px',
+                        padding: 'clamp(6px, 1.2vw, 9px) 2px',
                         background: isSel ? theme.bg : 'rgba(20, 24, 38, 0.6)',
                         color: isSel ? '#FFFFFF' : 'rgba(235, 240, 255, 0.7)',
                         border: isSel ? `1.5px solid ${theme.border}` : '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: 'var(--r-sm)',
                         cursor: 'pointer',
-                        fontSize: '11px',
+                        fontSize: 'clamp(9.5px, 1.1vw, 11px)',
                         fontWeight: isSel ? 800 : 600,
                         textAlign: 'center',
                         transition: 'all 0.18s ease',
                         boxShadow: isSel ? `0 0 16px ${theme.glow}` : 'none',
                         transform: isSel ? 'scale(1.03)' : 'scale(1)',
+                        letterSpacing: '-0.02em',
                       }}
                       data-cursor="press"
                     >
@@ -442,7 +444,7 @@ export const S02Studio: React.FC = () => {
               <span className="font-mono" style={{ color: 'var(--c-smoke)', display: 'block', marginBottom: '6px', fontSize: '11px' }}>
                 NEURAL ENGINE
               </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(4px, 0.8vw, 6px)' }}>
                 {MODELS.slice(0, 3).map((m, idx) => {
                   const isSel = m.id === modelId;
                   const accents = ['#00F5FF', '#A855F7', '#00FF88'];
@@ -454,13 +456,13 @@ export const S02Studio: React.FC = () => {
                       onClick={() => setModelId(m.id)}
                       className="font-btn"
                       style={{
-                        padding: '8px',
+                        padding: 'clamp(6px, 1vw, 8px)',
                         background: isSel ? `rgba(${idx === 0 ? '0, 245, 255' : idx === 1 ? '168, 85, 247' : '0, 255, 136'}, 0.2)` : 'rgba(20, 24, 38, 0.6)',
                         color: isSel ? '#FFFFFF' : 'rgba(235, 240, 255, 0.7)',
                         border: isSel ? `1.5px solid ${accent}` : '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: 'var(--r-sm)',
                         cursor: 'pointer',
-                        fontSize: '11px',
+                        fontSize: 'clamp(9.5px, 1.1vw, 11px)',
                         fontWeight: isSel ? 800 : 500,
                         textAlign: 'center',
                         boxShadow: isSel ? `0 0 15px ${accent}44` : 'none',
@@ -480,11 +482,11 @@ export const S02Studio: React.FC = () => {
               style={{
                 background: 'rgba(10, 13, 24, 0.75)',
                 borderRadius: 'var(--r-screen)',
-                padding: '16px 20px',
+                padding: 'clamp(10px, 1.5vw, 16px) clamp(6px, 1.5vw, 18px)',
                 border: '1px solid rgba(255, 255, 255, 0.12)',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '12px',
+                gap: 'clamp(6px, 1.2vw, 12px)',
                 boxShadow: 'inset 0 1px 4px rgba(0, 0, 0, 0.5)',
               }}
             >
@@ -530,13 +532,13 @@ export const S02Studio: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '12px',
-                padding: '18px 24px',
+                gap: '10px',
+                padding: 'clamp(13px, 1.8vw, 18px) clamp(16px, 2vw, 24px)',
                 borderRadius: 'var(--r-pill)',
                 cursor: isGenerating || !text.trim() ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
+                fontSize: 'clamp(12px, 1.3vw, 14px)',
                 fontWeight: 800,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.07em',
                 opacity: !text.trim() ? 0.6 : 1,
               }}
               data-cursor="press"
@@ -562,10 +564,10 @@ export const S02Studio: React.FC = () => {
             background: 'rgba(10, 13, 24, 0.85)',
             color: 'var(--c-bone)',
             borderRadius: 'var(--r-screen)',
-            padding: '14px 24px',
+            padding: 'clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 24px)',
             display: 'flex',
             alignItems: 'center',
-            gap: '20px',
+            gap: 'clamp(10px, 1.5vw, 20px)',
             flexWrap: 'wrap',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
@@ -623,7 +625,7 @@ export const S02Studio: React.FC = () => {
           </div>
 
           {/* Time & Scrubber */}
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '14px', minWidth: '220px' }}>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px', minWidth: 'clamp(140px, 30vw, 220px)' }}>
             <span className="font-mono" style={{ fontSize: '11px', color: '#00F5FF', fontWeight: 700 }}>
               {formatTime(currentTime)}
             </span>

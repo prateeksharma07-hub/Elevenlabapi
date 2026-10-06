@@ -39,7 +39,7 @@ export const S03Audio: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: 'clamp(72px, 8vw, 120px) clamp(24px, 5vw, 64px) 48px',
+        padding: 'clamp(56px, 7vw, 100px) clamp(14px, 4vw, 64px) clamp(20px, 3vw, 48px)',
         opacity,
         pointerEvents: isInteractive ? 'auto' : 'none',
         transition: 'opacity 0.25s ease',
@@ -105,7 +105,8 @@ export const S03Audio: React.FC = () => {
             border: '1.5px solid rgba(0, 255, 136, 0.3)',
             borderRadius: 'var(--r-screen)',
             padding: '18px 24px',
-            minWidth: '280px',
+            minWidth: 'min(280px, 100%)',
+            maxWidth: '340px',
             boxShadow: '0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0, 255, 136, 0.15)',
           }}
         >
@@ -179,6 +180,7 @@ export const S03Audio: React.FC = () => {
 
       {/* 4 Distinct Multi-Colored Callouts overlaying the 3D model */}
       <div
+        className="hide-on-mobile"
         style={{
           position: 'absolute',
           inset: 0,
@@ -186,21 +188,21 @@ export const S03Audio: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-around',
-          padding: '120px 80px',
+          padding: 'clamp(70px, 10vw, 120px) clamp(10px, 3vw, 80px)',
         }}
       >
         {/* Callout 1: Top-Left (Resonance Casing - Coral) */}
-        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5E3A', boxShadow: '0 0 15px #FF5E3A' }} />
-          <div style={{ width: '70px', height: '1.5px', background: 'linear-gradient(90deg, #FF5E3A, rgba(255, 94, 58, 0.2))' }} />
+        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF5E3A', boxShadow: '0 0 15px #FF5E3A', flexShrink: 0 }} />
+          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 70px)', height: '1.5px', background: 'linear-gradient(90deg, #FF5E3A, rgba(255, 94, 58, 0.2))' }} />
           <div
             className="font-mono"
             style={{
-              fontSize: '11px',
+              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
               color: '#FF5E3A',
               background: 'rgba(13, 16, 28, 0.85)',
               backdropFilter: 'blur(16px)',
-              padding: '6px 14px',
+              padding: '5px clamp(8px, 1.2vw, 14px)',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(255, 94, 58, 0.4)',
               boxShadow: '0 0 15px rgba(255, 94, 58, 0.25)',
@@ -212,15 +214,15 @@ export const S03Audio: React.FC = () => {
         </div>
 
         {/* Callout 2: Top-Right (Dot Matrix Screen - Cyan) */}
-        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div
             className="font-mono"
             style={{
-              fontSize: '11px',
+              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
               color: '#00F5FF',
               background: 'rgba(13, 16, 28, 0.85)',
               backdropFilter: 'blur(16px)',
-              padding: '6px 14px',
+              padding: '5px clamp(8px, 1.2vw, 14px)',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(0, 245, 255, 0.4)',
               boxShadow: '0 0 15px rgba(0, 245, 255, 0.25)',
@@ -229,22 +231,22 @@ export const S03Audio: React.FC = () => {
           >
             [02] SCREEN // 60-COL DYNAMIC MATRIX
           </div>
-          <div style={{ width: '70px', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 245, 255, 0.2), #00F5FF)' }} />
-          <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#00F5FF', boxShadow: '0 0 15px #00F5FF' }} />
+          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 70px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 245, 255, 0.2), #00F5FF)' }} />
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00F5FF', boxShadow: '0 0 15px #00F5FF', flexShrink: 0 }} />
         </div>
 
         {/* Callout 3: Center-Left (Acoustic Grille - Violet) */}
-        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#A855F7', boxShadow: '0 0 15px #A855F7' }} />
-          <div style={{ width: '80px', height: '1.5px', background: 'linear-gradient(90deg, #A855F7, rgba(168, 85, 247, 0.2))' }} />
+        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A855F7', boxShadow: '0 0 15px #A855F7', flexShrink: 0 }} />
+          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 80px)', height: '1.5px', background: 'linear-gradient(90deg, #A855F7, rgba(168, 85, 247, 0.2))' }} />
           <div
             className="font-mono"
             style={{
-              fontSize: '11px',
+              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
               color: '#A855F7',
               background: 'rgba(13, 16, 28, 0.85)',
               backdropFilter: 'blur(16px)',
-              padding: '6px 14px',
+              padding: '5px clamp(8px, 1.2vw, 14px)',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(168, 85, 247, 0.4)',
               boxShadow: '0 0 15px rgba(168, 85, 247, 0.25)',
@@ -256,15 +258,15 @@ export const S03Audio: React.FC = () => {
         </div>
 
         {/* Callout 4: Bottom-Right (Potentiometers - Emerald) */}
-        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div
             className="font-mono"
             style={{
-              fontSize: '11px',
+              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
               color: '#00FF88',
               background: 'rgba(13, 16, 28, 0.85)',
               backdropFilter: 'blur(16px)',
-              padding: '6px 14px',
+              padding: '5px clamp(8px, 1.2vw, 14px)',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(0, 255, 136, 0.4)',
               boxShadow: '0 0 15px rgba(0, 255, 136, 0.25)',
@@ -273,8 +275,8 @@ export const S03Audio: React.FC = () => {
           >
             [04] POTENTIOMETERS // 3-AXIS DETENT
           </div>
-          <div style={{ width: '80px', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 255, 136, 0.2), #00FF88)' }} />
-          <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#00FF88', boxShadow: '0 0 15px #00FF88' }} />
+          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 80px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 255, 136, 0.2), #00FF88)' }} />
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00FF88', boxShadow: '0 0 15px #00FF88', flexShrink: 0 }} />
         </div>
       </div>
 

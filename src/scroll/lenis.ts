@@ -74,7 +74,7 @@ export function initLenis(): () => void {
       useScrollStore.getState().setActiveSection(2);
     } else if (progress < 0.60) {
       useScrollStore.getState().setActiveSection(3);
-    } else if (progress < 0.82) {
+    } else if (progress < 0.80) {
       useScrollStore.getState().setActiveSection(4);
     } else {
       useScrollStore.getState().setActiveSection(5);
