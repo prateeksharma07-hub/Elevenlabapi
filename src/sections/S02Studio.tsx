@@ -5,6 +5,8 @@ import { VOICES, MODELS, DEMO_SCRIPTS } from '../services/elevenlabs';
 import { Knob2D } from '../ui/Knob2D';
 import { DotMatrix } from '../ui/DotMatrix';
 import { Play, Pause, Square, Download, Sparkles, Sliders, Volume2, Mic, RefreshCw, Cpu, Zap } from 'lucide-react';
+import { useIsMobile } from '../state/useIsMobile';
+import { MobileStudio } from './MobileStudio';
 
 // Persona color themes for vibrant multi-color identity
 const PERSONA_COLORS: Record<string, { bg: string; border: string; glow: string; text: string }> = {
@@ -124,9 +126,34 @@ export const S02Studio: React.FC = () => {
     }
   };
 
+  const isMobile = useIsMobile();
   const statusBadge = getStatusBadge();
   const currentPersona = VOICES.find((v) => v.id === voiceId) || VOICES[0];
   const activeColor = PERSONA_COLORS[voiceId] || { bg: 'rgba(0, 245, 255, 0.15)', border: '#00F5FF', glow: 'rgba(0, 245, 255, 0.4)', text: '#00F5FF' };
+
+  if (isMobile) {
+    return (
+      <section
+        id="scene-02"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 'clamp(52px, 8vh, 68px) 16px 16px',
+          opacity,
+          pointerEvents: isInteractive ? 'auto' : 'none',
+          transition: 'opacity 0.2s ease',
+          boxSizing: 'border-box',
+        }}
+      >
+        <MobileStudio />
+      </section>
+    );
+  }
 
   return (
     <section

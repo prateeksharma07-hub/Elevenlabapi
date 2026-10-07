@@ -45,6 +45,12 @@ export const LanguageRing: React.FC = () => {
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
+    const isMobile = state.size.width < 768 || state.viewport.aspect < 1.05;
+    if (isMobile) {
+      groupRef.current.visible = false;
+      return;
+    }
+
     const p = useScrollStore.getState().progress;
     const velocity = useScrollStore.getState().velocity;
 

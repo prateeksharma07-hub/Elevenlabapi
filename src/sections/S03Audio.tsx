@@ -2,9 +2,11 @@ import React from 'react';
 import { useScrollStore } from '../scroll/scrollStore';
 import { useStudio } from '../state/studioState';
 import { useLevels } from '../audio/useLevels';
+import { useIsMobile } from '../state/useIsMobile';
 import { Activity, Play, Volume2, Radio } from 'lucide-react';
 
 export const S03Audio: React.FC = () => {
+  const isMobile = useIsMobile();
   const progress = useScrollStore((s) => s.progress);
   const { isPlaying, audioUrl, playAudio } = useStudio();
   const levels = useLevels(isPlaying);
@@ -59,7 +61,7 @@ export const S03Audio: React.FC = () => {
       >
         <div>
           <span
-            className="font-mono"
+            className="font-mono hide-on-mobile"
             style={{
               background: 'linear-gradient(135deg, #00FF88, #00F5FF)',
               color: '#07080E',
@@ -73,31 +75,44 @@ export const S03Audio: React.FC = () => {
           >
             SCENE 03 // DISASSEMBLY
           </span>
+          <span
+            className="font-mono show-on-mobile"
+            style={{
+              color: '#6F6A60',
+              fontSize: '11px',
+              letterSpacing: '0.12em',
+              fontWeight: 600,
+            }}
+          >
+            SCENE 03 // DISASSEMBLY
+          </span>
           <h2
             className="font-display"
             style={{
-              fontSize: 'clamp(36px, 5.5vw, 72px)',
+              fontSize: 'clamp(28px, 5.5vw, 72px)',
               color: '#FFFFFF',
               marginTop: '12px',
               marginBottom: '6px',
               textShadow: '0 10px 30px rgba(0,0,0,0.6)',
+              lineHeight: 1.1,
             }}
           >
             Exploded acoustic{' '}
             <span
-              className="font-serif-italic text-fluid-gradient"
-              style={{ filter: 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.4))' }}
+              className="font-serif-italic serif-accent"
+              style={{ color: '#FF4B14' }}
             >
               resonance.
             </span>
           </h2>
-          <p className="font-body" style={{ color: 'rgba(235, 240, 255, 0.8)', maxWidth: '40ch', fontSize: '15px' }}>
+          <p className="font-body hide-on-mobile" style={{ color: 'rgba(235, 240, 255, 0.8)', maxWidth: '40ch', fontSize: '15px' }}>
             A decoupled 5-part architecture modulated in real time by 512-point Fast Fourier Transform telemetry.
           </p>
         </div>
 
-        {/* Real FFT Telemetry Meter Box - Frosted Cyber Glass */}
+        {/* Real FFT Telemetry Meter Box - DESKTOP ONLY */}
         <div
+          className="hide-on-mobile"
           style={{
             background: 'rgba(13, 16, 28, 0.85)',
             backdropFilter: 'blur(30px) saturate(180%)',
@@ -281,7 +296,9 @@ export const S03Audio: React.FC = () => {
       </div>
 
       {/* Bottom Bar: Action & Status */}
+      {/* Footer Controls: Desktop */}
       <div
+        className="hide-on-mobile"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -334,6 +351,63 @@ export const S03Audio: React.FC = () => {
           }}
         >
           SCROLL TO TRANSLATION →
+        </span>
+      </div>
+
+      {/* Footer Controls: Mobile Dedicated */}
+      <div
+        className="show-on-mobile"
+        style={{
+          width: '100%',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingBottom: '8px',
+        }}
+      >
+        {!isPlaying ? (
+          <button
+            type="button"
+            onClick={handleTriggerFallback}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: '#D4FF3A',
+              color: '#121212',
+              padding: '10px 20px',
+              borderRadius: '999px',
+              border: 'none',
+              fontFamily: "'DM Mono', monospace",
+              fontWeight: 800,
+              fontSize: '12px',
+              cursor: 'pointer',
+            }}
+          >
+            <Play size={13} fill="#121212" />
+            <span>TEST AUDIO</span>
+          </button>
+        ) : (
+          <span
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: '11px',
+              color: '#D4FF3A',
+              fontWeight: 700,
+            }}
+          >
+            ● PLAYING HARMONICS
+          </span>
+        )}
+
+        <span
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '11px',
+            color: '#6F6A60',
+            letterSpacing: '0.08em',
+          }}
+        >
+          SCROLL ↓
         </span>
       </div>
     </section>

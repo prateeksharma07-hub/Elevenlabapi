@@ -105,3 +105,7 @@ export function scrollToProgress(progress: number, immediate = false) {
     window.scrollTo({ top: target, behavior: immediate ? 'auto' : 'smooth' });
   }
 }
+
+if (typeof window !== 'undefined') {
+  (window as any).scrollToProgress = scrollToProgress;
+}

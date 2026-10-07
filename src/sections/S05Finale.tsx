@@ -5,8 +5,10 @@ import { useStudio } from '../state/studioState';
 import { Marquee } from '../ui/Marquee';
 import { Magnetic } from '../ui/Magnetic';
 import { ArrowUp, Volume2, Sparkles, ShieldCheck } from 'lucide-react';
+import { useIsMobile } from '../state/useIsMobile';
 
 export const S05Finale: React.FC = () => {
+  const isMobile = useIsMobile();
   const progress = useScrollStore((s) => s.progress);
   const { speakHeroGreeting, isGenerating, isPlaying } = useStudio();
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -19,6 +21,114 @@ export const S05Finale: React.FC = () => {
     setHasInteracted(true);
     speakHeroGreeting();
   };
+
+  if (isMobile) {
+    return (
+      <section
+        id="scene-05"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '24px 20px',
+          opacity,
+          pointerEvents: isInteractive ? 'auto' : 'none',
+          transition: 'opacity 0.25s ease',
+          userSelect: 'none',
+          boxSizing: 'border-box',
+          textAlign: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            maxWidth: '340px',
+            margin: '0 auto',
+          }}
+        >
+          {/* 1. Words are only the beginning */}
+          <p
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: '12px',
+              fontWeight: 600,
+              letterSpacing: '0.12em',
+              color: '#6F6A60',
+              textTransform: 'uppercase',
+              margin: 0,
+            }}
+          >
+            Words are only the beginning.
+          </p>
+
+          {/* 2. AURA */}
+          <h2
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 800,
+              fontSize: 'clamp(44px, 14vw, 68px)',
+              letterSpacing: '-0.04em',
+              lineHeight: 0.9,
+              color: '#F1EEE6',
+              margin: 0,
+            }}
+          >
+            AURA
+          </h2>
+
+          {/* 3. Turn written words into cinematic human voices */}
+          <p
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontSize: '15px',
+              fontWeight: 500,
+              lineHeight: '1.45',
+              color: 'rgba(241, 238, 230, 0.85)',
+              margin: '0 auto 8px',
+              maxWidth: '32ch',
+            }}
+          >
+            Turn written words into cinematic human voices.
+          </p>
+
+          {/* 4. [ Create a voice ] */}
+          <button
+            type="button"
+            onClick={() => scrollToProgress(0.22)}
+            style={{
+              width: '100%',
+              maxWidth: '280px',
+              minHeight: '48px',
+              borderRadius: '999px',
+              backgroundColor: '#D4FF3A',
+              color: '#121212',
+              border: 'none',
+              fontFamily: "'DM Mono', monospace",
+              fontWeight: 800,
+              fontSize: '13px',
+              letterSpacing: '0.08em',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+            }}
+          >
+            <span>CREATE A VOICE</span>
+            <ArrowUp size={16} color="#121212" />
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

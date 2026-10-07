@@ -32,26 +32,38 @@ export const Capsule: React.FC = () => {
     // In S2 Studio (0.185 to 0.375): Screen has match-cut into DOM Studio.
     // Pause/sleep 3D capsule visibility to save GPU and prevent occlusion of 2D product
     const inStudioMatchCut = p >= 0.185 && p <= 0.375;
-    groupRef.current.visible = !inStudioMatchCut;
+    const isMobile = state.size.width < 768 || state.viewport.aspect < 1.05;
+    
+    // In S5 Finale on mobile (p >= 0.81): Art direction requires minimal editorial coda with no floating objects
+    const hideOnMobileFinale = isMobile && p >= 0.81;
 
-    if (inStudioMatchCut) return;
+    groupRef.current.visible = !inStudioMatchCut && !hideOnMobileFinale;
+
+    if (inStudioMatchCut || hideOnMobileFinale) return;
+
+    const targetScale = isMobile ? sample.capsuleScale * 0.78 : sample.capsuleScale;
 
     // 1. Position & Scale
-    groupRef.current.position.lerp(sample.capsulePos, 0.12);
-    groupRef.current.scale.setScalar(THREE.MathUtils.lerp(groupRef.current.scale.x, sample.capsuleScale, 0.12));
+    const targetPos = sample.capsulePos.clone();
+    if (isMobile && p < 0.14) {
+      targetPos.y = -0.18; // centered below mobile headline and above bottom CTA
+    }
+    groupRef.current.position.lerp(targetPos, 0.12);
+    groupRef.current.scale.setScalar(THREE.MathUtils.lerp(groupRef.current.scale.x, targetScale, 0.12));
 
     // 2. Rotation & Idle Float
     let targetRotX = sample.capsuleRot.x;
     let targetRotY = sample.capsuleRot.y;
     let targetRotZ = sample.capsuleRot.z;
 
-    // In S1 Intro (0 - 14%): Idle organic float (yaw +/- 12 deg, pitch +/- 8 deg)
+    // In S1 Intro (0 - 14%): Idle organic float (subtle on mobile, full on desktop)
     if (p < 0.14) {
       const time = state.clock.elapsedTime;
-      targetRotY += Math.sin(time * 0.8) * THREE.MathUtils.degToRad(12);
-      targetRotX += Math.cos(time * 0.6) * THREE.MathUtils.degToRad(8);
+      const idleMultiplier = isMobile ? 0.5 : 1.0;
+      targetRotY += Math.sin(time * 0.7) * THREE.MathUtils.degToRad(12 * idleMultiplier);
+      targetRotX += Math.cos(time * 0.5) * THREE.MathUtils.degToRad(8 * idleMultiplier);
       // Gentle floating bob
-      groupRef.current.position.y += Math.sin(time * 1.2) * 0.035;
+      groupRef.current.position.y += Math.sin(time * 1.1) * (0.035 * idleMultiplier);
     }
 
     groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.1);

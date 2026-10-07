@@ -7,8 +7,13 @@ export const Cursor: React.FC = () => {
   const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
-    // Hide custom cursor on touch screens per specification!
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Hide custom cursor completely on touch devices and mobile viewports
+    const isTouchDevice =
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.innerWidth <= 768 ||
+      'ontouchstart' in window;
+
+    if (isTouchDevice) {
       setIsTouch(true);
       return;
     }

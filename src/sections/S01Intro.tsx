@@ -43,123 +43,195 @@ export const S01Intro: React.FC = () => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          flexDirection: 'column',
           width: '100%',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span
-              className="font-mono"
-              style={{
-                background: 'linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(168, 85, 247, 0.2))',
-                border: '1px solid rgba(0, 245, 255, 0.4)',
-                color: 'var(--c-cyan)',
-                padding: '3px 10px',
-                borderRadius: 'var(--r-pill)',
-                fontSize: 'clamp(10px, 1vw, 11px)',
-                fontWeight: 700,
-                boxShadow: '0 0 15px rgba(0, 245, 255, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              <Radio size={11} className="spin" />
-              <span>AURA // 047</span>
-            </span>
-          </div>
-          <span
-            className="font-mono hide-on-mobile"
-            style={{
-              color: 'var(--c-smoke)',
-              fontSize: '11px',
-              letterSpacing: '0.08em',
-            }}
-          >
-            PHYSICAL NEURAL ACOUSTIC SYNTHESIS
-          </span>
-        </div>
-
-        {/* Circular Holographic Badge: 29 LANGUAGES / 10 VOICES */}
         <div
           style={{
-            position: 'relative',
-            width: 'clamp(80px, 15vw, 116px)',
-            height: 'clamp(80px, 15vw, 116px)',
-            borderRadius: '50%',
-            background: 'rgba(13, 16, 27, 0.85)',
-            backdropFilter: 'blur(20px)',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            transform: `rotate(-6deg) scale(${pulseFactor})`,
-            transition: 'transform 0.15s ease-out',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 245, 255, 0.35)',
-            border: '1.5px solid rgba(0, 245, 255, 0.5)',
-            flexShrink: 0,
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            width: '100%',
           }}
-          data-cursor="press"
-          onClick={speakHeroGreeting}
         >
-          {/* Animated Rainbow Conic Rim */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: '-3px',
-              borderRadius: '50%',
-              background: 'conic-gradient(from 0deg, #00F5FF, #A855F7, #FF007A, #FFB800, #00FF88, #00F5FF)',
-              zIndex: -1,
-              animation: 'spin 12s linear infinite',
-              opacity: 0.8,
-              filter: 'blur(3px)',
-            }}
-          />
-
-          <svg
-            viewBox="0 0 100 100"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              animation: 'spin 22s linear infinite',
-            }}
-          >
-            <path
-              id="circlePath"
-              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-              fill="none"
-            />
-            <text fill="#FFFFFF" fontSize="8" letterSpacing="0.16em" fontWeight="700">
-              <textPath href="#circlePath">
-                29 LANGUAGES • 10 VOICES • ELEVENLABS •
-              </textPath>
-            </text>
-          </svg>
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(9px, 1.4vw, 11px)',
-              fontWeight: 900,
-              background: 'linear-gradient(135deg, #00F5FF, #00FF88)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textAlign: 'center',
-              lineHeight: 1.15,
-            }}
-          >
-            PLAY
-            <br />
-            HERO
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                className="font-mono hide-on-mobile"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(168, 85, 247, 0.2))',
+                  border: '1px solid rgba(0, 245, 255, 0.4)',
+                  color: 'var(--c-cyan)',
+                  padding: '3px 10px',
+                  borderRadius: 'var(--r-pill)',
+                  fontSize: 'clamp(10px, 1vw, 11px)',
+                  fontWeight: 700,
+                  boxShadow: '0 0 15px rgba(0, 245, 255, 0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <Radio size={11} className="spin" />
+                <span>AURA // 047</span>
+              </span>
+            </div>
+            <span
+              className="font-mono hide-on-mobile"
+              style={{
+                color: 'var(--c-smoke)',
+                fontSize: '11px',
+                letterSpacing: '0.08em',
+              }}
+            >
+              PHYSICAL NEURAL ACOUSTIC SYNTHESIS
+            </span>
           </div>
+
+          {/* Circular Holographic Badge: DESKTOP ONLY */}
+          <div
+            className="hide-on-mobile"
+            style={{
+              position: 'relative',
+              width: 'clamp(80px, 15vw, 116px)',
+              height: 'clamp(80px, 15vw, 116px)',
+              borderRadius: '50%',
+              background: 'rgba(13, 16, 27, 0.85)',
+              backdropFilter: 'blur(20px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transform: `rotate(-6deg) scale(${pulseFactor})`,
+              transition: 'transform 0.15s ease-out',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 245, 255, 0.35)',
+              border: '1.5px solid rgba(0, 245, 255, 0.5)',
+              flexShrink: 0,
+            }}
+            data-cursor="press"
+            onClick={speakHeroGreeting}
+          >
+            {/* Animated Rainbow Conic Rim */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: '-3px',
+                borderRadius: '50%',
+                background: 'conic-gradient(from 0deg, #00F5FF, #A855F7, #FF007A, #FFB800, #00FF88, #00F5FF)',
+                zIndex: -1,
+                animation: 'spin 12s linear infinite',
+                opacity: 0.8,
+                filter: 'blur(3px)',
+              }}
+            />
+
+            <svg
+              viewBox="0 0 100 100"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                animation: 'spin 22s linear infinite',
+              }}
+            >
+              <path
+                id="circlePath"
+                d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                fill="none"
+              />
+              <text fill="#FFFFFF" fontSize="8" letterSpacing="0.16em" fontWeight="700">
+                <textPath href="#circlePath">
+                  29 LANGUAGES • 10 VOICES • ELEVENLABS •
+                </textPath>
+              </text>
+            </svg>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(9px, 1.4vw, 11px)',
+                fontWeight: 900,
+                background: 'linear-gradient(135deg, #00F5FF, #00FF88)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textAlign: 'center',
+                lineHeight: 1.15,
+              }}
+            >
+              PLAY
+              <br />
+              HERO
+            </div>
+          </div>
+        </div>
+
+        {/* Dedicated Mobile Editorial Headline (Positioned cleanly at the top of the mobile screen) */}
+        <div
+          className="show-on-mobile"
+          style={{
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            width: '100%',
+            marginTop: '10px',
+            pointerEvents: 'none',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              color: '#6F6A60',
+              fontSize: '11px',
+              letterSpacing: '0.14em',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              marginBottom: '6px',
+            }}
+          >
+            AURA ONE // INSTRUMENT
+          </span>
+          <h1
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontSize: 'clamp(28px, 8.5vw, 38px)',
+              fontWeight: 800,
+              color: '#F1EEE6',
+              margin: 0,
+              lineHeight: 1.0,
+              letterSpacing: '-0.03em',
+            }}
+          >
+            Give words a{' '}
+            <span
+              style={{
+                fontFamily: "'Instrument Serif', Georgia, serif",
+                fontStyle: 'italic',
+                fontWeight: 400,
+                color: '#FF4B14',
+              }}
+            >
+              voice.
+            </span>
+          </h1>
+          <p
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#6F6A60',
+              lineHeight: 1.35,
+              marginTop: '6px',
+              maxWidth: '30ch',
+            }}
+          >
+            A physical voice instrument driven by neural acoustic synthesis.
+          </p>
         </div>
       </div>
 
-      {/* Main Massive Headline Behind Canvas */}
+      {/* Main Massive Headline Behind Canvas - DESKTOP ONLY */}
       <div
-        className="hero-headline-wrap"
+        className="hero-headline-wrap hide-on-mobile"
         style={{
           width: '100%',
           textAlign: 'center',
@@ -210,7 +282,9 @@ export const S01Intro: React.FC = () => {
       </div>
 
       {/* Bottom Controls / CTAs */}
+      {/* Desktop Controls (Unchanged) */}
       <div
+        className="hide-on-mobile"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -246,7 +320,7 @@ export const S01Intro: React.FC = () => {
             <span>{isGenerating ? 'SYNTHESIZING...' : isPlaying ? 'PLAYING AURA...' : 'PRESS HERO TO SPEAK'}</span>
           </button>
           <span
-            className="font-mono hide-on-mobile"
+            className="font-mono"
             style={{
               fontSize: '11px',
               color: 'var(--c-smoke)',
@@ -282,6 +356,43 @@ export const S01Intro: React.FC = () => {
             <ArrowDown size={16} />
           </button>
         </Magnetic>
+      </div>
+
+      {/* Mobile-Only Single Dominant CTA */}
+      <div
+        className="show-on-mobile"
+        style={{
+          width: '100%',
+          justifyContent: 'center',
+          paddingBottom: '8px',
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => scrollToProgress(0.22)}
+          style={{
+            width: '100%',
+            maxWidth: '380px',
+            minHeight: '48px',
+            borderRadius: '999px',
+            backgroundColor: '#D4FF3A',
+            color: '#121212',
+            border: 'none',
+            fontFamily: "'DM Mono', monospace",
+            fontWeight: 800,
+            fontSize: '13px',
+            letterSpacing: '0.08em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            cursor: 'pointer',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          <span>OPEN STUDIO</span>
+          <ArrowDown size={16} color="#121212" />
+        </button>
       </div>
     </section>
   );

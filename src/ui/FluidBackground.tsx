@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useScrollStore } from '../scroll/scrollStore';
 import { useStudio } from '../state/studioState';
 import { useLevels } from '../audio/useLevels';
+import { useIsMobile } from '../state/useIsMobile';
 
 export const FluidBackground: React.FC = () => {
+  const isMobile = useIsMobile();
   const progress = useScrollStore((s) => s.progress);
   const { isPlaying } = useStudio();
   const levels = useLevels(isPlaying);
@@ -77,6 +79,22 @@ export const FluidBackground: React.FC = () => {
   const hues = getOrbHues(progress);
   const mx = (mousePos.x - 0.5) * 60;
   const my = (mousePos.y - 0.5) * 60;
+
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          backgroundColor: '#121212',
+          backgroundImage: 'radial-gradient(ellipse at 50% 25%, #1e1c18 0%, #121212 75%)',
+        }}
+      />
+    );
+  }
 
   return (
     <div

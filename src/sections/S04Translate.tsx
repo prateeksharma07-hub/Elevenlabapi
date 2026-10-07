@@ -3,10 +3,13 @@ import { useStudio } from '../state/studioState';
 import { useScrollStore } from '../scroll/scrollStore';
 import { LANGUAGES_29 } from '../services/translation';
 import { ArrowRight, Copy, Check, Send, Globe, ArrowLeftRight, Sparkles, Languages } from 'lucide-react';
+import { useIsMobile } from '../state/useIsMobile';
+import { MobileTranslate } from './MobileTranslate';
 
 const POPULAR_LANGS = ['EN-US', 'ES', 'FR', 'DE', 'JA', 'HI', 'ZH', 'IT', 'AR', 'KO'];
 
 export const S04Translate: React.FC = () => {
+  const isMobile = useIsMobile();
   const {
     transSource,
     setTransSource,
@@ -57,6 +60,30 @@ export const S04Translate: React.FC = () => {
     setTransSourceLang(transTargetLang);
     setTransTargetLang(tempLang);
   };
+
+  if (isMobile) {
+    return (
+      <section
+        id="scene-04"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 'clamp(52px, 8vh, 68px) 16px 16px',
+          opacity,
+          pointerEvents: isInteractive ? 'auto' : 'none',
+          transition: 'opacity 0.25s ease',
+          boxSizing: 'border-box',
+        }}
+      >
+        <MobileTranslate />
+      </section>
+    );
+  }
 
   return (
     <section

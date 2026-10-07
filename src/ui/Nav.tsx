@@ -33,8 +33,9 @@ export const Nav: React.FC = () => {
         overflow: 'hidden',
       }}
     >
-      {/* Brand Logo with Iridescent Aura */}
+      {/* Desktop Brand Logo with Iridescent Aura */}
       <div
+        className="hide-on-mobile"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -64,7 +65,7 @@ export const Nav: React.FC = () => {
           AURA ONE
         </span>
         <span
-          className="font-mono hide-on-mobile"
+          className="font-mono"
           style={{
             color: 'var(--c-bone)',
             opacity: 0.85,
@@ -77,11 +78,39 @@ export const Nav: React.FC = () => {
         </span>
       </div>
 
-      {/* Five-Section Frosted Floating Pill Navigation */}
-      <nav
-        className="nav-pills"
+      {/* Mobile-Only Minimal Header Brand */}
+      <div
+        className="show-on-mobile"
         style={{
-          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          pointerEvents: 'auto',
+          cursor: 'pointer',
+          flexShrink: 0,
+        }}
+        onClick={() => scrollToProgress(0)}
+      >
+        <span
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontWeight: 800,
+            fontSize: '13px',
+            letterSpacing: '0.14em',
+            color: '#F1EEE6',
+            background: '#121212',
+            padding: '4px 10px',
+            borderRadius: '6px',
+            border: '1px solid rgba(241, 238, 230, 0.2)',
+          }}
+        >
+          AURA
+        </span>
+      </div>
+
+      {/* Five-Section Frosted Floating Pill Navigation (DESKTOP ONLY) */}
+      <nav
+        className="nav-pills hide-on-mobile"
+        style={{
           alignItems: 'center',
           gap: 'clamp(2px, 0.5vw, 6px)',
           background: 'rgba(13, 16, 27, 0.8)',
@@ -167,24 +196,39 @@ export const Nav: React.FC = () => {
           <span style={{ fontWeight: 700 }}>SECURE</span>
         </div>
 
-        {/* Sound Toggle (Icon-only on mobile, full label on desktop) */}
+        {/* Mobile Studio Shortcut */}
+        <button
+          type="button"
+          onClick={() => scrollToProgress(0.22)}
+          className="font-mono show-on-mobile"
+          style={{
+            background: 'transparent',
+            color: 'var(--c-bone)',
+            border: 'none',
+            fontSize: '11px',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            padding: '6px 8px',
+            cursor: 'pointer',
+          }}
+        >
+          STUDIO
+        </button>
+
+        {/* Sound Toggle (Desktop: vibrant gradient; Mobile: calm monochrome) */}
         <button
           type="button"
           onClick={toggleSoundMuted}
-          className="font-btn"
+          className="font-btn nav-sound-btn"
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            background: soundMuted ? 'rgba(26, 32, 50, 0.8)' : 'linear-gradient(135deg, #00F5FF, #A855F7)',
-            color: soundMuted ? 'var(--c-smoke)' : '#FFFFFF',
-            border: soundMuted ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(255, 255, 255, 0.3)',
             padding: '6px clamp(10px, 1.3vw, 16px)',
             borderRadius: 'var(--r-pill)',
             cursor: 'pointer',
             fontSize: '11px',
             fontWeight: 700,
-            boxShadow: soundMuted ? 'none' : '0 0 18px rgba(0, 245, 255, 0.35)',
             transition: 'all 0.2s ease',
             whiteSpace: 'nowrap',
           }}
