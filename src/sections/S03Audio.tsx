@@ -41,7 +41,7 @@ export const S03Audio: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: 'clamp(56px, 7vw, 100px) clamp(14px, 4vw, 64px) clamp(20px, 3vw, 48px)',
+        padding: 'clamp(50px, 5.5vh, 76px) clamp(20px, 3.5vw, 60px) clamp(16px, 2.5vh, 36px)',
         opacity,
         pointerEvents: isInteractive ? 'auto' : 'none',
         transition: 'opacity 0.25s ease',
@@ -56,21 +56,23 @@ export const S03Audio: React.FC = () => {
           alignItems: 'flex-start',
           width: '100%',
           flexWrap: 'wrap',
-          gap: '20px',
+          gap: '16px',
+          zIndex: 2,
         }}
       >
-        <div>
+        <div style={{ maxWidth: 'min(580px, 60%)' }}>
           <span
             className="font-mono hide-on-mobile"
             style={{
               background: 'linear-gradient(135deg, #00FF88, #00F5FF)',
               color: '#07080E',
-              padding: '5px 14px',
+              padding: '4px 12px',
               borderRadius: 'var(--r-sm)',
               fontWeight: 900,
-              fontSize: '11px',
+              fontSize: '10.5px',
               letterSpacing: '0.06em',
               boxShadow: '0 0 16px rgba(0, 255, 136, 0.4)',
+              display: 'inline-block',
             }}
           >
             SCENE 03 // DISASSEMBLY
@@ -89,12 +91,13 @@ export const S03Audio: React.FC = () => {
           <h2
             className="font-display"
             style={{
-              fontSize: 'clamp(28px, 5.5vw, 72px)',
+              fontSize: 'clamp(24px, min(3.8vw, 5.2vh), 46px)',
               color: '#FFFFFF',
-              marginTop: '12px',
-              marginBottom: '6px',
-              textShadow: '0 10px 30px rgba(0,0,0,0.6)',
-              lineHeight: 1.1,
+              marginTop: '8px',
+              marginBottom: '4px',
+              textShadow: '0 8px 24px rgba(0,0,0,0.6)',
+              lineHeight: 1.08,
+              letterSpacing: '-0.02em',
             }}
           >
             Exploded acoustic{' '}
@@ -105,7 +108,16 @@ export const S03Audio: React.FC = () => {
               resonance.
             </span>
           </h2>
-          <p className="font-body hide-on-mobile" style={{ color: 'rgba(235, 240, 255, 0.8)', maxWidth: '40ch', fontSize: '15px' }}>
+          <p
+            className="font-body hide-on-mobile"
+            style={{
+              color: 'rgba(235, 240, 255, 0.8)',
+              maxWidth: '38ch',
+              fontSize: 'clamp(12px, 1.1vw, 13.5px)',
+              lineHeight: 1.4,
+              margin: '4px 0 0',
+            }}
+          >
             A decoupled 5-part architecture modulated in real time by 512-point Fast Fourier Transform telemetry.
           </p>
         </div>
@@ -118,11 +130,12 @@ export const S03Audio: React.FC = () => {
             backdropFilter: 'blur(30px) saturate(180%)',
             WebkitBackdropFilter: 'blur(30px) saturate(180%)',
             border: '1.5px solid rgba(0, 255, 136, 0.3)',
-            borderRadius: 'var(--r-screen)',
-            padding: '18px 24px',
-            minWidth: 'min(280px, 100%)',
-            maxWidth: '340px',
-            boxShadow: '0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0, 255, 136, 0.15)',
+            borderRadius: '14px',
+            padding: '12px 18px',
+            minWidth: '220px',
+            maxWidth: '280px',
+            boxShadow: '0 12px 32px rgba(0,0,0,0.6), 0 0 24px rgba(0, 255, 136, 0.12)',
+            flexShrink: 0,
           }}
         >
           <div
@@ -130,97 +143,103 @@ export const S03Audio: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: '14px',
+              marginBottom: '10px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Activity size={15} color="#00FF88" />
-              <span className="font-mono" style={{ fontSize: '11px', color: '#00FF88', fontWeight: 800 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Activity size={13} color="#00FF88" />
+              <span className="font-mono" style={{ fontSize: '10px', color: '#00FF88', fontWeight: 800 }}>
                 FFT 512 TELEMETRY
               </span>
             </div>
-            <span className="font-mono" style={{ fontSize: '10px', color: 'var(--c-smoke)' }}>
-              44.1 kHz // 86Hz/BIN
+            <span className="font-mono" style={{ fontSize: '9.5px', color: 'var(--c-smoke)' }}>
+              44.1 kHz // 86Hz
             </span>
           </div>
 
           {/* 4 Multi-Color Telemetry Bars */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
             {/* Sub-Bass (Coral/Magenta) */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                <span className="font-mono" style={{ fontSize: '10px', color: 'rgba(235, 240, 255, 0.8)' }}>SUB-BASS (0-2)</span>
-                <span className="font-mono" style={{ fontSize: '10px', color: '#FF5E3A', fontWeight: 700 }}>{(levels.subBass * 100).toFixed(0)}%</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: 'rgba(235, 240, 255, 0.8)' }}>SUB-BASS</span>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: '#FF5E3A', fontWeight: 700 }}>{(levels.subBass * 100).toFixed(0)}%</span>
               </div>
-              <div style={{ height: '5px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ width: `${levels.subBass * 100}%`, height: '100%', background: 'linear-gradient(90deg, #FF5E3A, #FF007A)', boxShadow: '0 0 10px #FF5E3A', transition: 'width 0.08s ease' }} />
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ width: `${levels.subBass * 100}%`, height: '100%', background: 'linear-gradient(90deg, #FF5E3A, #FF007A)', boxShadow: '0 0 8px #FF5E3A', transition: 'width 0.08s ease' }} />
               </div>
             </div>
 
             {/* Mid (Cyan/Violet) */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                <span className="font-mono" style={{ fontSize: '10px', color: 'rgba(235, 240, 255, 0.8)' }}>MID (3-23)</span>
-                <span className="font-mono" style={{ fontSize: '10px', color: '#00F5FF', fontWeight: 700 }}>{(levels.mid * 100).toFixed(0)}%</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: 'rgba(235, 240, 255, 0.8)' }}>MID</span>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: '#00F5FF', fontWeight: 700 }}>{(levels.mid * 100).toFixed(0)}%</span>
               </div>
-              <div style={{ height: '5px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ width: `${levels.mid * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00F5FF, #A855F7)', boxShadow: '0 0 10px #00F5FF', transition: 'width 0.08s ease' }} />
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ width: `${levels.mid * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00F5FF, #A855F7)', boxShadow: '0 0 8px #00F5FF', transition: 'width 0.08s ease' }} />
               </div>
             </div>
 
             {/* Treble (Emerald/Lime) */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                <span className="font-mono" style={{ fontSize: '10px', color: 'rgba(235, 240, 255, 0.8)' }}>TREBLE (24-93)</span>
-                <span className="font-mono" style={{ fontSize: '10px', color: '#00FF88', fontWeight: 700 }}>{(levels.treble * 100).toFixed(0)}%</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: 'rgba(235, 240, 255, 0.8)' }}>TREBLE</span>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: '#00FF88', fontWeight: 700 }}>{(levels.treble * 100).toFixed(0)}%</span>
               </div>
-              <div style={{ height: '5px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ width: `${levels.treble * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00FF88, #D4FF3A)', boxShadow: '0 0 10px #00FF88', transition: 'width 0.08s ease' }} />
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ width: `${levels.treble * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00FF88, #D4FF3A)', boxShadow: '0 0 8px #00FF88', transition: 'width 0.08s ease' }} />
               </div>
             </div>
 
             {/* Peak RMS (Prismatic Rainbow) */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                <span className="font-mono" style={{ fontSize: '10px', color: 'rgba(235, 240, 255, 0.8)' }}>PEAK RMS</span>
-                <span className="font-mono" style={{ fontSize: '10px', color: '#FFB800', fontWeight: 700 }}>{(levels.peak * 100).toFixed(0)}%</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: 'rgba(235, 240, 255, 0.8)' }}>PEAK RMS</span>
+                <span className="font-mono" style={{ fontSize: '9.5px', color: '#FFB800', fontWeight: 700 }}>{(levels.peak * 100).toFixed(0)}%</span>
               </div>
-              <div style={{ height: '5px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ width: `${levels.peak * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00F5FF, #A855F7, #FF007A, #FFB800)', boxShadow: '0 0 10px #FFB800', transition: 'width 0.08s ease' }} />
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ width: `${levels.peak * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00F5FF, #A855F7, #FF007A, #FFB800)', boxShadow: '0 0 8px #FFB800', transition: 'width 0.08s ease' }} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 4 Distinct Multi-Colored Callouts overlaying the 3D model */}
+      {/* 4 Precision Blueprint Callouts Framing the 3D Exploded Capsule */}
       <div
         className="hide-on-mobile"
         style={{
           position: 'absolute',
           inset: 0,
           pointerEvents: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-          padding: 'clamp(70px, 10vw, 120px) clamp(10px, 3vw, 80px)',
+          zIndex: 1,
         }}
       >
-        {/* Callout 1: Top-Left (Resonance Casing - Coral) */}
-        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF5E3A', boxShadow: '0 0 15px #FF5E3A', flexShrink: 0 }} />
-          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 70px)', height: '1.5px', background: 'linear-gradient(90deg, #FF5E3A, rgba(255, 94, 58, 0.2))' }} />
+        {/* Callout 1: Mid-Left (Resonance Casing - Coral) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '44%',
+            left: 'clamp(20px, 3.5vw, 60px)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#FF5E3A', boxShadow: '0 0 12px #FF5E3A', flexShrink: 0 }} />
+          <div style={{ width: 'clamp(20px, 3vw, 48px)', height: '1.5px', background: 'linear-gradient(90deg, #FF5E3A, rgba(255, 94, 58, 0.2))' }} />
           <div
             className="font-mono"
             style={{
-              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
+              fontSize: '10px',
               color: '#FF5E3A',
-              background: 'rgba(13, 16, 28, 0.85)',
+              background: 'rgba(13, 16, 28, 0.88)',
               backdropFilter: 'blur(16px)',
-              padding: '5px clamp(8px, 1.2vw, 14px)',
+              padding: '4px 10px',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(255, 94, 58, 0.4)',
-              boxShadow: '0 0 15px rgba(255, 94, 58, 0.25)',
+              boxShadow: '0 0 14px rgba(255, 94, 58, 0.2)',
               fontWeight: 700,
             }}
           >
@@ -228,70 +247,97 @@ export const S03Audio: React.FC = () => {
           </div>
         </div>
 
-        {/* Callout 2: Top-Right (Dot Matrix Screen - Cyan) */}
-        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Callout 2: Mid-Right (Dot Matrix Screen - Cyan) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '36%',
+            right: 'clamp(20px, 3.5vw, 60px)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
           <div
             className="font-mono"
             style={{
-              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
+              fontSize: '10px',
               color: '#00F5FF',
-              background: 'rgba(13, 16, 28, 0.85)',
+              background: 'rgba(13, 16, 28, 0.88)',
               backdropFilter: 'blur(16px)',
-              padding: '5px clamp(8px, 1.2vw, 14px)',
+              padding: '4px 10px',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(0, 245, 255, 0.4)',
-              boxShadow: '0 0 15px rgba(0, 245, 255, 0.25)',
+              boxShadow: '0 0 14px rgba(0, 245, 255, 0.2)',
               fontWeight: 700,
             }}
           >
-            [02] SCREEN // 60-COL DYNAMIC MATRIX
+            [02] SCREEN // 60-COL MATRIX
           </div>
-          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 70px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 245, 255, 0.2), #00F5FF)' }} />
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00F5FF', boxShadow: '0 0 15px #00F5FF', flexShrink: 0 }} />
+          <div style={{ width: 'clamp(20px, 3vw, 48px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 245, 255, 0.2), #00F5FF)' }} />
+          <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00F5FF', boxShadow: '0 0 12px #00F5FF', flexShrink: 0 }} />
         </div>
 
-        {/* Callout 3: Center-Left (Acoustic Grille - Violet) */}
-        <div style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A855F7', boxShadow: '0 0 15px #A855F7', flexShrink: 0 }} />
-          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 80px)', height: '1.5px', background: 'linear-gradient(90deg, #A855F7, rgba(168, 85, 247, 0.2))' }} />
+        {/* Callout 3: Lower-Left (Acoustic Grille - Violet) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '64%',
+            left: 'clamp(20px, 3.5vw, 60px)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#A855F7', boxShadow: '0 0 12px #A855F7', flexShrink: 0 }} />
+          <div style={{ width: 'clamp(20px, 3vw, 48px)', height: '1.5px', background: 'linear-gradient(90deg, #A855F7, rgba(168, 85, 247, 0.2))' }} />
           <div
             className="font-mono"
             style={{
-              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
+              fontSize: '10px',
               color: '#A855F7',
-              background: 'rgba(13, 16, 28, 0.85)',
+              background: 'rgba(13, 16, 28, 0.88)',
               backdropFilter: 'blur(16px)',
-              padding: '5px clamp(8px, 1.2vw, 14px)',
+              padding: '4px 10px',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(168, 85, 247, 0.4)',
-              boxShadow: '0 0 15px rgba(168, 85, 247, 0.25)',
+              boxShadow: '0 0 14px rgba(168, 85, 247, 0.2)',
               fontWeight: 700,
             }}
           >
-            [03] GRILLE // 168 TREBLE APERTURES
+            [03] GRILLE // 168 TREBLE PORTS
           </div>
         </div>
 
-        {/* Callout 4: Bottom-Right (Potentiometers - Emerald) */}
-        <div style={{ alignSelf: 'flex-end', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Callout 4: Lower-Right (Potentiometers - Emerald) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '66%',
+            right: 'clamp(20px, 3.5vw, 60px)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
           <div
             className="font-mono"
             style={{
-              fontSize: 'clamp(9.5px, 1.1vw, 11px)',
+              fontSize: '10px',
               color: '#00FF88',
-              background: 'rgba(13, 16, 28, 0.85)',
+              background: 'rgba(13, 16, 28, 0.88)',
               backdropFilter: 'blur(16px)',
-              padding: '5px clamp(8px, 1.2vw, 14px)',
+              padding: '4px 10px',
               borderRadius: 'var(--r-pill)',
               border: '1px solid rgba(0, 255, 136, 0.4)',
-              boxShadow: '0 0 15px rgba(0, 255, 136, 0.25)',
+              boxShadow: '0 0 14px rgba(0, 255, 136, 0.2)',
               fontWeight: 700,
             }}
           >
-            [04] POTENTIOMETERS // 3-AXIS DETENT
+            [04] POTENTIOMETERS // 3-AXIS
           </div>
-          <div className="hide-on-mobile" style={{ width: 'clamp(30px, 5vw, 80px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 255, 136, 0.2), #00FF88)' }} />
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00FF88', boxShadow: '0 0 15px #00FF88', flexShrink: 0 }} />
+          <div style={{ width: 'clamp(20px, 3vw, 48px)', height: '1.5px', background: 'linear-gradient(90deg, rgba(0, 255, 136, 0.2), #00FF88)' }} />
+          <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00FF88', boxShadow: '0 0 12px #00FF88', flexShrink: 0 }} />
         </div>
       </div>
 

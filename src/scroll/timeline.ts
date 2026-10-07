@@ -38,23 +38,43 @@ export function getBackgroundColor(progress: number, isNightShift = false): THRE
   return result;
 }
 
-// Catmull-Rom spline for Camera Position across 0.0 - 1.0
-// S1: 0-14% (z 4.2)
-// S2: 14-38% (z 4.2 -> 0.9 match cut)
-// S3: 38-60% (orbit yaw -110 deg, pitch 8 deg, z 3.2)
-// S4: 60-82% (z 5.5, slight top-down)
-// S5: 82-100% (z 4.2 -> 7.0 wide pullback)
-const cameraCurve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(0, 0, 4.2),        // 0.00: S1 Intro
-  new THREE.Vector3(0, 0.15, 3.2),     // 0.12: approaching screen
-  new THREE.Vector3(0, 0.44, 0.65),    // 0.18: S2 Studio match-cut point into screen center
-  new THREE.Vector3(0, 0.44, 0.70),    // 0.35: Studio holding
-  new THREE.Vector3(-0.85, 0.25, 3.3), // 0.48: S3 Audio exploded orbit
-  new THREE.Vector3(-0.95, 0.20, 3.5), // 0.58: Audio climax
-  new THREE.Vector3(0, 1.2, 5.5),      // 0.70: S4 Translate slight top-down
-  new THREE.Vector3(0, 0.3, 4.2),      // 0.85: S5 Finale start
-  new THREE.Vector3(0, 0, 7.0),        // 1.00: S5 Finale wide pullback
-]);
+// Precise scene-keyed Camera Position across 0.0 - 1.0
+// Guarantees zero lag and flawless framing for each scene regardless of curve arc-lengths
+export function getCameraPosition(p: number): THREE.Vector3 {
+  const pos = new THREE.Vector3();
+  if (p <= 0.14) {
+    // S1 Intro
+    const t = smoothstep(0.0, 0.14, p);
+    pos.lerpVectors(new THREE.Vector3(0, 0, 4.2), new THREE.Vector3(0, 0.15, 3.2), t);
+  } else if (p <= 0.38) {
+    // S2 Studio match-cut into screen
+    const tIn = smoothstep(0.14, 0.19, p);
+    const tHold = smoothstep(0.19, 0.38, p);
+    const enterPos = new THREE.Vector3(0, 0.44, 0.65);
+    const holdPos = new THREE.Vector3(0, 0.44, 0.70);
+    pos.lerpVectors(new THREE.Vector3(0, 0.15, 3.2), enterPos, tIn);
+    pos.lerp(holdPos, tHold);
+  } else if (p <= 0.60) {
+    // S3 Audio exploded orbit: pulls back smoothly to z = 4.8 for spacious blueprint framing
+    const tPull = smoothstep(0.38, 0.44, p);
+    const tDrift = smoothstep(0.44, 0.60, p);
+    const s3Start = new THREE.Vector3(-0.35, 0.15, 4.8);
+    const s3End = new THREE.Vector3(-0.50, 0.12, 5.0);
+    pos.lerpVectors(new THREE.Vector3(0, 0.44, 0.70), s3Start, tPull);
+    pos.lerp(s3End, tDrift);
+  } else if (p <= 0.82) {
+    // S4 Translate top-down
+    const t = smoothstep(0.60, 0.70, p);
+    pos.lerpVectors(new THREE.Vector3(-0.50, 0.12, 5.0), new THREE.Vector3(0, 1.2, 5.5), t);
+  } else {
+    // S5 Finale wide pullback
+    const tIn = smoothstep(0.82, 0.88, p);
+    const tOut = smoothstep(0.88, 1.00, p);
+    pos.lerpVectors(new THREE.Vector3(0, 1.2, 5.5), new THREE.Vector3(0, 0.3, 4.2), tIn);
+    pos.lerp(new THREE.Vector3(0, 0, 6.5), tOut);
+  }
+  return pos;
+}
 
 export interface TimelineSample {
   cameraPos: THREE.Vector3;
@@ -72,7 +92,7 @@ export function sampleTimeline(p: number, isNightShift = false): TimelineSample 
   const clampP = Math.max(0, Math.min(1, p));
 
   // 1. Camera
-  const cameraPos = cameraCurve.getPointAt(clampP);
+  const cameraPos = getCameraPosition(clampP);
   let cameraFov = 38;
   if (clampP > 0.14 && clampP <= 0.38) {
     cameraFov = 34; // Deep focus on screen during Studio
@@ -86,8 +106,16 @@ export function sampleTimeline(p: number, isNightShift = false): TimelineSample 
   const capsulePos = new THREE.Vector3(0, 0, 0);
   let capsuleScale = 1.0;
 
-  // S4 Translate: capsule reassembles, scale 0.45, parks top-center
-  if (clampP >= 0.60 && clampP <= 0.82) {
+  // S3 Audio: frame capsule in the center-right quadrant to give title & telemetry room
+  if (clampP >= 0.38 && clampP <= 0.62) {
+    const tIn = smoothstep(0.38, 0.45, clampP);
+    const tOut = smoothstep(0.58, 0.62, clampP);
+    const s3Weight = tIn * (1 - tOut);
+    capsulePos.x = THREE.MathUtils.lerp(0, 0.40, s3Weight);
+    capsulePos.y = THREE.MathUtils.lerp(0, -0.26, s3Weight);
+    capsuleScale = THREE.MathUtils.lerp(1.0, 0.70, s3Weight);
+  } else if (clampP >= 0.60 && clampP <= 0.82) {
+    // S4 Translate: capsule reassembles, scale 0.45, parks top-center
     const tIn = smoothstep(0.60, 0.66, clampP);
     const tOut = smoothstep(0.78, 0.84, clampP);
     const parkAmount = tIn * (1 - tOut);
@@ -108,10 +136,10 @@ export function sampleTimeline(p: number, isNightShift = false): TimelineSample 
     // S2 Studio: perfectly facing screen
     capsuleRot.set(0, 0, 0);
   } else if (clampP <= 0.60) {
-    // S3 Audio exploded view: dynamic 3/4 perspective yaw 0 -> -50 deg, pitch 12 deg
-    const tOrbit = smoothstep(0.38, 0.52, clampP);
-    capsuleRot.y = THREE.MathUtils.degToRad(-50 * tOrbit);
-    capsuleRot.x = THREE.MathUtils.degToRad(12 * tOrbit);
+    // S3 Audio exploded view: dynamic 3/4 perspective yaw 0 -> -35 deg, pitch 14 deg
+    const tOrbit = smoothstep(0.38, 0.50, clampP);
+    capsuleRot.y = THREE.MathUtils.degToRad(-35 * tOrbit);
+    capsuleRot.x = THREE.MathUtils.degToRad(14 * tOrbit);
   } else if (clampP <= 0.82) {
     // S4 Translate: upright top-down tilt
     capsuleRot.x = THREE.MathUtils.degToRad(12);

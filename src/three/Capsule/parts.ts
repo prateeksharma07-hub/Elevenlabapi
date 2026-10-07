@@ -1,15 +1,15 @@
 import * as THREE from 'three';
 
 // Explosion vectors for Scene 3 (Audio exploded view: 38% - 60%)
-// shell: +/-0.9, screen: 0.4, knobs: 0.6, grille: 0.2, button: 0.7
+// Refined schematic spacing: clean gaps between parts without colliding into viewport boundaries
 export const EXPLODE_VECTORS = {
-  frontShell: new THREE.Vector3(0, 0, 0.9),
-  backShell: new THREE.Vector3(0, 0, -0.9),
-  screen: new THREE.Vector3(0, 0.4, 0.4),
-  grille: new THREE.Vector3(0, -0.3, 0.2),
-  knobs: new THREE.Vector3(0.5, 0, 0.6),
-  button: new THREE.Vector3(0, -0.4, 0.7),
-  ledRing: new THREE.Vector3(0, -0.4, 0.65),
+  frontShell: new THREE.Vector3(0, 0, 0.45),
+  backShell: new THREE.Vector3(0, 0, -0.55),
+  screen: new THREE.Vector3(0, 0.32, 0.35),
+  grille: new THREE.Vector3(0, -0.22, 0.22),
+  knobs: new THREE.Vector3(0.35, 0, 0.42),
+  button: new THREE.Vector3(0, -0.28, 0.48),
+  ledRing: new THREE.Vector3(0, -0.28, 0.46),
 };
 
 // Base positions in assembled state

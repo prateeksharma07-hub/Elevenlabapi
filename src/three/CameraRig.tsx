@@ -31,6 +31,10 @@ export const CameraRig: React.FC = () => {
     if (isMobile && p >= 0.14 && p <= 0.38) {
       sampleZ = Math.max(1.15, sample.cameraPos.z * 1.3);
     }
+    // Laptop screens (height <= 850px): gentle pull back in Scene 3 to prevent congestion
+    if (!isMobile && size.height <= 850 && p >= 0.38 && p <= 0.62) {
+      sampleZ = sampleZ * 1.12;
+    }
 
     const desiredX = sample.cameraPos.x + parallaxX;
     const desiredY = sample.cameraPos.y + parallaxY + mobileYOffset;
